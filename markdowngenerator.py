@@ -14,8 +14,12 @@ if __name__ == "__main__":
     try:
         if name:
             #cleaning the string
-            cleaned_string = re.sub(r'[^a-zA-Z0-9- ]', '', name)
-            name = cleaned_string.replace(" ","-")
+            cleaned = re.sub(r'[^a-zA-Z0-9 ]', '', name)
+            name=""
+            for word in cleaned.split(" "):
+                if len(word)>0:
+                    name+=word+"-"
+            name=name[:-1]
             #combining the api and title slug
             url=api+name
             #getting the response from the api
