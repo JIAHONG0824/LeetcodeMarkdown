@@ -1,5 +1,6 @@
 import requests
 import streamlit as st
+import re
 
 @st.cache_data
 def markdowngenerator(url):
@@ -12,9 +13,9 @@ if __name__ == "__main__":
     name=st.text_input("Enter the problem name")
     try:
         if name:
-            #preprocessing the problem name
-            name = name.translate(str.maketrans(' ', '-', ',()'))
-            name=name.lower()
+            #cleaning the string
+            cleaned_string = re.sub(r'[^a-zA-Z0-9- ]', '', name)
+            name = cleaned_string.replace(" ","-")
             #combining the api and title slug
             url=api+name
             #getting the response from the api
